@@ -10,7 +10,10 @@ import java.util.*
  * @author : ZAZE
  * @version : 2018-12-04 - 0:11
  */
-fun main(args: Array<String>) {
+fun main() {
+    Lambda.debug()
+    Vararg.debug()
+    Infix.debug()
 //    val strList = listOf("a", "ab", "abc","abcd","abcde","abcdef","abcdefg")
 //    // 非常好用的流式 API filter，flat，map 等等
 //    val mstrList = strList.filter(h(::g, ::f))
