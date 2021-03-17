@@ -2,19 +2,16 @@ package com.zaze.kotlin.example.coroutine
 
 import com.zaze.kotlin.example.DateUtil
 import com.zaze.kotlin.example.MyLog
-import java.lang.Exception
-import javax.xml.crypto.Data
+import java.io.File
 import kotlin.concurrent.thread
-import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 suspend fun main() {
-    MyLog.i(DateUtil.timeMillisToString(), "main start")
-    val result = testSuspendable("testSuspendable")
-    MyLog.i(DateUtil.timeMillisToString(), result)
-    MyLog.i(DateUtil.timeMillisToString(), "main finish")
+    log("main start")
+    log("main result: ${testSuspendable("testSuspendable")} ")
+    log("main finish")
 }
 
 suspend fun testSuspendable(url: String): String {
@@ -32,6 +29,15 @@ suspend fun testSuspendable(url: String): String {
 }
 
 fun download(url: String): String {
-    Thread.sleep(2000L)
+    log("Download start")
+    Thread.sleep(1000L)
+    System.getProperties().forEach {
+        log("${it.key}=${it.value}")
+    }
+    log("Download")
     return url
+}
+
+private fun log(msg: String) {
+    MyLog.i("coroutine: ${DateUtil.timeMillisToString()}", msg)
 }
