@@ -25,3 +25,4 @@ val continuation = suspend {
 fun main() {
     continuation.resume(Unit)
 }
+
