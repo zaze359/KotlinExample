@@ -1,7 +1,8 @@
 package com.zaze.kotlin.example
 
-import java.sql.DriverManager.println
-import java.util.*
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
 
 
 /**
@@ -11,9 +12,11 @@ import java.util.*
  * @version : 2018-12-04 - 0:11
  */
 fun main() {
-    Lambda.debug()
-    Vararg.debug()
-    Infix.debug()
+//
+//    Lambda.debug()
+//    Vararg.debug()
+//    Infix.debug()
+
 //    val strList = listOf("a", "ab", "abc","abcd","abcde","abcdef","abcdefg")
 //    // 非常好用的流式 API filter，flat，map 等等
 //    val mstrList = strList.filter(h(::g, ::f))
@@ -30,6 +33,7 @@ fun main() {
 //    //Kotlin1.1才开始支持
 //    args.filter(String::isEmpty)
 }
+
 //// ------------------------------------------------------
 //class Test {
 //    fun println(any: Any) {
@@ -38,11 +42,11 @@ fun main() {
 //}
 //
 //// ------------------------------------------------------
-//class MyInt(val value: Int) {
-//    fun show() {
-//        println(value)
-//    }
-//}
+class MyInt(val value: Int) {
+    fun show() {
+        println(value)
+    }
+}
 //
 //// ------------------------------------------------------
 //typealias G = (String) -> Int
