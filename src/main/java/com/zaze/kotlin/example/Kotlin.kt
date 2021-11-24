@@ -1,9 +1,5 @@
 package com.zaze.kotlin.example
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
-
 
 /**
  * Description :
@@ -11,13 +7,36 @@ import com.google.gson.JsonObject
  * @author : ZAZE
  * @version : 2018-12-04 - 0:11
  */
+
+var sss: String? = null
 fun main() {
 //
 //    Lambda.debug()
 //    Vararg.debug()
 //    Infix.debug()
 
-//    val strList = listOf("a", "ab", "abc","abcd","abcde","abcdef","abcdefg")
+    Thread.sleep(1000L)
+    repeat(10, ::doSSS)
+
+
+    val strList = listOf("1", "1", "1", "1", "1", "1", "1")
+
+    strList.map aa@{
+        return@aa
+    }
+
+    println(strList.fold(0, { r, t ->
+        println(r)
+        r + t.toInt()
+    }))
+
+//    val set1 = setOf("1", "2")
+//    val set2 = setOf("1", "2")
+//    println("set1 set2 : ${set1 == set2} ${set1 === set2}")
+//
+//    println("GsonBuilder A : ${GsonBuilder().create().fromJson("{\"appId\":false}", B::class.java).a}")
+//    println("GsonBuilder A : ${GsonBuilder().create().fromJson("{\"appId\":false}", HashMap::class.java)}")
+
 //    // 非常好用的流式 API filter，flat，map 等等
 //    val mstrList = strList.filter(h(::g, ::f))
 //    println(mstrList)
@@ -32,6 +51,14 @@ fun main() {
 //    //扩展方法有一个隐含的参数--实例
 //    //Kotlin1.1才开始支持
 //    args.filter(String::isEmpty)
+}
+
+fun doSSS(i: Int) {
+    println("s : $i")
+    sss = "$i"
+    Thread(Runnable {
+        println("sss : $sss")
+    }).start()
 }
 
 //// ------------------------------------------------------
@@ -63,4 +90,9 @@ class MyInt(val value: Int) {
 //}
 //
 //
-//val display: (MyInt) -> Unit = MyInt::show
+//val display: (MyInt) -> Unit = MyInt::show'
+
+data class A(
+    var a: Boolean,
+    val b: Boolean? = false
+)

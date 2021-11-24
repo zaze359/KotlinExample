@@ -1,5 +1,7 @@
-package com.zaze.kotlin.example
+package com.zaze.kotlin.example.test
 
+import com.zaze.kotlin.example.DateUtil
+import com.zaze.kotlin.example.MyLog
 import java.util.concurrent.CompletableFuture
 
 fun main(args: Array<String>) {

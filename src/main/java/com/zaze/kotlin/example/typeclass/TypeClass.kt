@@ -19,15 +19,15 @@ import com.zaze.kotlin.example.typeclass.ListFunctor.show2
  */
 fun main() {
 
-    val a = { x : (Int) -> (Int) -> Int, -> x(1) } // ((Int) -> (Int) -> Int) -> (Int) -> Int
-    val b = {x:(Int) -> Int , -> x(1) }       // ((Int) -> Int) -> Int
-    val c = { c:Int -> c }                  // (Int) -> Int
-    val d = {x:Int -> {y :Int -> x + y}}    // (Int) -> (Int) -> Int
+    val a = { x: (Int) -> (Int) -> Int -> x(1) } // ((Int) -> (Int) -> Int) -> (Int) -> Int
+    val b = { x: (Int) -> Int -> x(1) }       // ((Int) -> Int) -> Int
+    val c = { c: Int -> c }                  // (Int) -> Int
+    val d = { x: Int -> { y: Int -> x + y } }    // (Int) -> (Int) -> Int
 
 //    println("a ${a(b(c))}")
     println("a ${a { (c) }}")
     println("a ${a(d)(2)}")
-    println("b ${b({ x -> 10})}")
+    println("b ${b({ x -> 10 })}")
     println("b ${b(c)}")
     println("c ${c(10)}")
     println("d ${d(10)(1)}")
@@ -68,7 +68,7 @@ interface Functor<F> {
 
     fun <A> Kind<F, A>.show(a: Show<A>): String
 
-    fun <A> Kind<F, A>.show2(a : (A) -> String): String
+    fun <A> Kind<F, A>.show2(a: (A) -> String): String
 
 }
 
@@ -122,7 +122,7 @@ object ListFunctor : Functor<List.K> {
     override fun <A> Kind<List.K, A>.show(a: Show<A>): String {
         val fa = this
         return "[" + ListFunctor.run {
-            fa.fold(listOf<String>())(){ r, i ->
+            fa.fold(listOf<String>())() { r, i ->
                 r + a.run {
                     i.show()
                 }
@@ -133,7 +133,7 @@ object ListFunctor : Functor<List.K> {
     override fun <A> Kind<List.K, A>.show2(a: (A) -> String): String {
         val fa = this
         return "[" + ListFunctor.run {
-            fa.fold(listOf<String>())(){ r, i ->
+            fa.fold(listOf<String>())() { r, i ->
                 r + a(i)
             }.joinToString()
         } + "]"
@@ -170,7 +170,7 @@ abstract class ListShow<A>(val a: Show<A>) : Show<Kind<List.K, A>> {
     override fun Kind<List.K, A>.show(): String {
         val fa = this
         return "[" + ListFunctor.run {
-            fa.fold(listOf<String>())(){ r, i ->
+            fa.fold(listOf<String>())() { r, i ->
                 r + a.run {
                     i.show()
                 }

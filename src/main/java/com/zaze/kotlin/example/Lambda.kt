@@ -20,12 +20,22 @@ fun foo(x: Int): (y: Int) -> Unit = { y ->
 
 object Lambda {
     fun debug() {
-        { x: Int -> println("aaa : $x") }(1)
-        sum(1, 2)
-        sum.invoke(1, 2)
-        arrayOf(1, 2, 3).forEach {
-            //            foo(it).invoke(1)
-            foo(it)(1)
+//        { x: Int -> println("aaa : $x") }(1)
+//        sum(1, 2)
+//        sum.invoke(1, 2)
+//        arrayOf(1, 2, 3).forEach {
+//            //            foo(it).invoke(1)
+//            foo(it)(1)
+//        }
+
+//        aaa(1, { 1 })
+        aaa(1, 1) {
+            1
         }
     }
 }
+
+fun aaa(a: Int = 1, c: Int, b: () -> Int): Int {
+    return a + b()
+}
+
