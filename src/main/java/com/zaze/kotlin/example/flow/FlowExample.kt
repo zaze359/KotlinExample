@@ -5,79 +5,27 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import java.lang.NullPointerException
-
-fun simple(): Sequence<Int> =
-    sequence { // 序列构建器
-        for (i in 1..3) {
-            Thread.sleep(1000) // 假装我们正在计算
-            yield(i) // 产生下一个值
-        }
-    }
-
+private val TAG = "FlowExample"
 
 fun main() = runBlocking {
-
-    launch {
-
-        for (k in 1..10) {
-            println("I'm not blocked $k")
-            delay(100)
-        }
-    }
-
-    simple().forEach {
-        log(TAG, "Sequence : $it")
-    }
-
-
-    val flow = productor()
-//        .catch {
-//            log(TAG, "collect catch: ${it.message}")
-//        }
-//        .flatMapConcat {
-//            flow<Int> {
-//                emit(it)
+    var flow = productor()
+//    flow = productorAsnc()
+//    flow = stateFlow()
+    // 验证 flowOn 仅对上游产生效果。
+//    flow
+////            .flowOn(Dispatchers.IO)
+//            .map {
+//                log(TAG, "map $it to ${it * 2} in ${currentCoroutineContext()}")
+//                it * 2
 //            }
-//        }
-
-//    withContext(Dispatchers.IO) {
-//        flow.collect {
-//            delay(100L)
-//            log(TAG, "collect 1: $it")
-//        }
-//        log(TAG, "collect: 123123123")
-//    }
-
-//    try {
-//        flow.collect {
-//            delay(100L)
-//            log(TAG, "collect: $it")
-//        }
-//    } catch (e: Exception) {
-//        log(TAG, "collect Exception: ${e.message}")
-//    }
-//    withContext(Dispatchers.Default) {
-//        flow.collect {
-//            delay(100L)
-//            log(TAG, "collect2: $it")
-//        }
-//    }
-//
-//    productor()
-//        .shareIn(this, replay = 1, started = SharingStarted.WhileSubscribed())
-//        .collect {
-//            delay(10L)
-//            log(TAG, "collect: $it")
-//        }
-//
-//    productorAsnc().stateIn(this)
-//        .collect {
-//            delay(10L)
-//            log(TAG, "collect: $it")
-//        }
+////            .flowOn(Dispatchers.Default)
+//            .catch { e ->
+//                log(TAG, "collect Exception: ${e.message}")
+//            }.collect {
+//                delay(1000L)
+//                log(TAG, "collect $it in ${currentCoroutineContext()}")
+//            }
 }
-
-private val TAG = "FlowExample"
 
 /**
  * 同步非阻塞
@@ -85,23 +33,34 @@ private val TAG = "FlowExample"
 suspend fun productor() = flow<Int> {
     for (i in 1..10) {
 //        delay(100L)
-        Thread.sleep(100L)
-        log(TAG, "produce: $i")
+//        Thread.sleep(100L)
+        log(TAG, "produce $i in ${currentCoroutineContext()}")
         emit(i)
-        if (i == 5) {
-            throw NullPointerException("123123")
-        }
+//        if (i == 5) {
+//            throw NullPointerException("123123")
+//        }
     }
 }
 
 /**
  * 异步非阻塞
  */
-suspend fun productorAsnc() = channelFlow<Int> {
+suspend fun productorAsnc(): Flow<Int> {
+    return channelFlow<Int> {
+        for (i in 1..10) {
+            delay(100L)
+            log(TAG, "produce $i in ${currentCoroutineContext()}")
+            send(i)
+        }
+    }
+}
+
+suspend fun stateFlow(): StateFlow<Int> {
+    val flow = MutableStateFlow(-1)
     for (i in 1..10) {
         delay(100L)
-        log(TAG, "produce: $i")
-        send(i)
-
+        log(TAG, "produce $i in ${currentCoroutineContext()}")
+        flow.emit(i)
     }
+    return flow
 }

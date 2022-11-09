@@ -2,39 +2,44 @@ package com.zaze.kotlin.example.channel
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.internal.ChannelFlow
+
+/**
+ * 发送默认会挂起当前协程, 可以通过指定capacity和onBufferOverflow修改行为。
+ * 接收数据会挂起当前协程
+ */
 
 fun main() = runBlocking {
-    launch {
-        for (k in 1..100) {
-            println("I'm not blocked $k")
-            delay(100)
-        }
-    }
-
-    val channel = Channel<Int>()
-
-
-
+    var channel = Channel<Int>()
+//    channel = Channel<Int>(onBufferOverflow = BufferOverflow.DROP_OLDEST) // 效果等同 capacity = Channel.CONFLATED
+    channel = Channel(capacity = Channel.CONFLATED,  onUndeliveredElement = { i ->
+        println("channel onUndeliveredElement $i")
+    })
+//    channel = Channel(capacity = Channel.UNLIMITED)
+//    channel = Channel(capacity = Channel.BUFFERED)
+//    channel = Channel(capacity = Channel.BUFFERED, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val job = launch {
-        // 这里可能是消耗大量 CPU 运算的异步逻辑,我们将仅仅做 5 次整数的平方并发送
-        for (x in 1..6) {
-            channel.send(x * x)
-            delay(500)
+        for (i in 0..200) {
+            println("channel send $i")
+            channel.send(i)
+            delay(50)
         }
     }
-    // 这里我们打印了 5 次被接收的整数:
-
-    try {
-        for (i in channel) {
-            println("------------------------------ channel: $i")
-            if(i >= 20) {
-                job.cancel()
-                channel.close()
-            }
-        }
-    } finally {
-        println("Done!")
+    delay(5000)
+    // receive()会挂起当前协程
+    repeat(10) {
+        println("channel repeat received: ${channel.receive()}")
+        delay(100)
     }
-    println("------------------------------ last")
+    // channel支持遍历
+    for (i in channel) {
+        // 从10开始打印，0~9 已被消费
+        println("channel foreach received: $i")
+        delay(100)
+        // 若不主动close()，将一直等待接收新数据
+//        if (i >= 100) {
+//            channel.close()
+//            job.cancel()
+//        }
+    }
+    println("Done!")
 }

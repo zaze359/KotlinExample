@@ -1,6 +1,7 @@
 package com.zaze.kotlin.example
 
 import java.io.*
+import java.nio.charset.Charset
 
 object FileUtils {
     fun exists(file: File?): Boolean {
@@ -74,12 +75,37 @@ object FileUtils {
         }
     }
 
+    //
+    fun readFromFile(file: File, charset: Charset = Charset.defaultCharset()): StringBuffer {
+        var inputStream :InputStream? = null
+        val results = StringBuffer()
+        try {
+            inputStream = FileInputStream(file)
+            val bytes = ByteArray(4096)
+            var byteLength = inputStream.read(bytes)
+            while (byteLength != -1) {
+                results.append(String(bytes, 0, byteLength, charset))
+                byteLength = inputStream.read(bytes)
+            }
+            inputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                inputStream?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        return results
+    }
+
     fun createDirNotExists(path: String): Boolean {
         val file = File(path)
-        if (file.exists()) {
-            return file.isDirectory
+        return if (file.exists()) {
+            file.isDirectory
         } else {
-            return file.mkdirs()
+            file.mkdirs()
         }
     }
 

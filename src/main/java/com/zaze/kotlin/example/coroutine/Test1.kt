@@ -25,6 +25,8 @@ fun main() = runBlocking {
     println("Coroutine scope is over") // 这一行在内嵌 launch 执行完毕后才输出」
 }
 
+
+
 /**
  * 提取函数重构
  */

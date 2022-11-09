@@ -18,11 +18,10 @@ import com.zaze.kotlin.example.typeclass.ListFunctor.show2
  * 函子: 高阶类型之间的映射 ????
  */
 fun main() {
-
-    val a = { x: (Int) -> (Int) -> Int -> x(1) } // ((Int) -> (Int) -> Int) -> (Int) -> Int
-    val b = { x: (Int) -> Int -> x(1) }       // ((Int) -> Int) -> Int
-    val c = { c: Int -> c }                  // (Int) -> Int
-    val d = { x: Int -> { y: Int -> x + y } }    // (Int) -> (Int) -> Int
+    val a = { x: (Int) -> (Int) -> Int -> x(1) } // ((Int) -> (Int) -> Int)    ->     (Int) -> Int
+    val b = { x: (Int) -> Int -> x(1) }       // ((Int) -> Int)    ->    Int
+    val c = { c: Int -> c }                  // (Int)    ->   Int
+    val d = { x: Int -> { y: Int -> x + y } }    // (Int)    ->     (Int) -> Int
 
 //    println("a ${a(b(c))}")
     println("a ${a { (c) }}")
