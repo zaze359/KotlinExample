@@ -1,9 +1,11 @@
 package com.zaze.kotlin.example.coroutine
 
 import com.zaze.kotlin.example.*
+import com.zaze.kotlin.example.coroutine.lua.CoroutineScope
 import kotlinx.coroutines.*
 import java.io.File
 import kotlin.concurrent.thread
+import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -11,7 +13,23 @@ import kotlin.coroutines.suspendCoroutine
 
 val tag = "coroutine"
 
+
 fun main() = runBlocking {
+    println("main 1 ${currentCoroutineContext()}")
+    val deferred: Deferred<String> = async {
+        println("main 2 ${currentCoroutineContext()}")
+        println("In async:${Thread.currentThread().name}")
+        delay(1000L) // 模拟耗时操作
+        println("In async after delay!")
+        return@async "Task completed!"
+    }
+    println("main 3 ${currentCoroutineContext()}")
+    // 不再调用 deferred.await()
+    delay(2000L)
+    println("main 4 ${currentCoroutineContext()}")
+    println("main end!")
+}
+fun main2() = runBlocking {
     log(tag, "---- start");
 
 //    launch {
@@ -19,14 +37,13 @@ fun main() = runBlocking {
 //            log(tag, "launching")
 //            delay(100L)
 //        }
-//
+//    }
 //        val result = testSuspendable("testSuspendable")
 //        log(tag, "main result: $result ")
-//    }
 
-//    withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
-//        log(tag, "aaaa: ${aa()}")
-//    }
+    withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
+        log(tag, "aaaa: ${aa()}")
+    }
 
 
 //    withContext(Dispatchers.IO) {
@@ -37,6 +54,7 @@ fun main() = runBlocking {
 //        println("--------------- fun a start ------------------")
 //        log(tag, "main start")
     log(tag, "main result: ${testSuspendable("testSuspendable")} ")
+
 //        log(tag, "main finish")
 //
 //        FileUtils.deleteFile(File("testRes/async"))
@@ -62,25 +80,32 @@ fun main() = runBlocking {
 
 private fun startCoroutine() {
     // funTest协程体
-    val funTest: suspend CoroutineScope.() -> Unit = {
-        println("funTest")
-//        suspendFun1()
-//        suspendFun2()
-    }
-    GlobalScope.launch(Dispatchers.Default, block = funTest)
+//    val funTest: suspend CoroutineScope.() -> Unit = {
+//        println("funTest")
+////        suspendFun1()
+////        suspendFun2()
+//    }
+//    GlobalScope.launch(Dispatchers.Default, block = funTest)
 }
-suspend fun testSuspendable(url: String): String {
-    return suspendCoroutine { continuation ->
+
+suspend fun testSuspendable(url: String): Any? {
+    log(tag, "---- testSuspendable start");
+    val res: Any? = suspendCoroutine { continuation ->
 //        thread {
-            try {
-                // 将正常的结果返回
-                continuation.resume(download(url))
-            } catch (e: Exception) {
-                // 将异常返回
-                continuation.resumeWithException(e)
-            }
+//            try {
+//                // 将正常的结果返回
+////                continuation.resume(download(url))
+//                continuation.resume("url")
+//            } catch (e: Exception) {
+//                // 将异常返回
+//                continuation.resumeWithException(e)
+//            }
 //        }
+        log(tag, "---- suspendCoroutine");
     }
+
+    log(tag, "---- testSuspendable end $res");
+    return res
 }
 
 fun download(url: String): String {

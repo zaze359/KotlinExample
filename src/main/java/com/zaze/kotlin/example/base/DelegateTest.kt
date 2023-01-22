@@ -1,14 +1,15 @@
 package com.zaze.kotlin.example.delegate
 
 import kotlin.properties.ReadOnlyProperty
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
  * 委托
  */
 fun main() {
-    val b = BaseImpl(10)
-    val derived = Derived(b)
+    val base = BaseImpl(10)
+    val derived = Derived(base)
     derived.print()
     derived.printMessage()
 }
@@ -39,7 +40,7 @@ class Derived(b: Base) : Base by b {
     override val message: String
         get() = "Derived message"
 
-    val delegate: String by MyDelegate()
+    var delegate: String by MyDelegate()
 
     /**
      * 覆盖委托方法
@@ -49,18 +50,28 @@ class Derived(b: Base) : Base by b {
     }
 }
 
-class MyDelegate : ReadOnlyProperty<Derived, String> {
+/**
+ * 自定义委托
+ * val 使用 ReadOnlyProperty 重写 getValue 即可
+ * var 使用 ReadWriteProperty 重写 getValue 和 getValue
+ */
+class MyDelegate : ReadWriteProperty<Derived, String> {
+    private var value = "MyDelegate"
     override fun getValue(thisRef: Derived, property: KProperty<*>): String {
-        return "$thisRef >> ${property.name}"
+        println("MyDelegate getValue:  ${property.name}")
+        return ""
     }
 
-//    operator fun provideDelegate(thisRef: Derived, property: KProperty<*>): ReadOnlyProperty<Derived, T> {
-//        checkProperty(thisRef, property.name)         …… // 属性创建
-//    }
-//
-//    operator fun getValue(derived: Derived, property: KProperty<*>): String {
-//        return "$derived >> ${property.name}"
-//    }
+    operator fun provideDelegate(thisRef: Derived, property: KProperty<*>): ReadWriteProperty<Derived, String> {
+        // 提供委托时 可以做的一些特殊处理，此处就打印以下日志直接返回自身了
+        println("MyDelegate provideDelegate: ${property.name}")
+        return this
+    }
+
+    override fun setValue(thisRef: Derived, property: KProperty<*>, value: String) {
+        println("MyDelegate setValue: ${property.name} >> $value")
+        this.value = value
+    }
 }
 
 class Loader {

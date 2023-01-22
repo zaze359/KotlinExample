@@ -2,7 +2,6 @@ package com.zaze.kotlin.example.async
 
 import com.zaze.kotlin.example.DateUtil
 import com.zaze.kotlin.example.MyLog
-import kotlinx.coroutines.delay
 import java.util.concurrent.CompletableFuture
 
 /**

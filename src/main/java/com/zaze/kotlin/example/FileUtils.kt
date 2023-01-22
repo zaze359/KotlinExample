@@ -30,7 +30,8 @@ object FileUtils {
 
     /**
      * 强制重新创建文件(如果存在则删除创建)
-     * [filePath] 绝对路径
+     *
+     * [file] 需要创建的文件
      */
     fun reCreateFile(file: File): Boolean {
         if (exists(file)) {

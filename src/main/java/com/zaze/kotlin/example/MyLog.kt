@@ -9,3 +9,11 @@ object MyLog {
         i(tag, message)
     }
 }
+
+fun log(tag: String, msg: String) {
+    MyLog.i("${DateUtil.timeMillisToString()} $tag: ", msg)
+}
+
+fun logThread(tag: String = "", msg: String) {
+    MyLog.i("${DateUtil.timeMillisToString()} ${Thread.currentThread().name} $tag: ", msg)
+}
