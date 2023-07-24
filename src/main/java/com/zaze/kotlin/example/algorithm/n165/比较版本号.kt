@@ -5,8 +5,12 @@ package com.zaze.kotlin.example.algorithm.n165
  */
 class Solution {
     fun compareVersion(version1: String, version2: String): Int {
+//        return compareVersion1(version1, version2)
         return compareVersion2(version1, version2)
+    }
 
+
+    fun compareVersion1(version1: String, version2: String): Int {
         val version1A = version1.split(".").map(::removePreZero).toMutableList()
         val version2A = version2.split(".").map(::removePreZero).toMutableList()
         val offset = version1A.size - version2A.size
@@ -39,8 +43,7 @@ class Solution {
     private fun removePreZero(str: String): Int {
         return str.toInt()
     }
-
-    // 双指针
+        // 双指针
     fun compareVersion2(version1: String, version2: String): Int {
         val len1 = version1.length
         val len2 = version2.length

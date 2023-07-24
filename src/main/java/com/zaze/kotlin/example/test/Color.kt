@@ -1,12 +1,6 @@
-package com.zaze.kotlin.example
+package com.zaze.kotlin.example.test
 
-import java.util.UUID
-
-
-fun main() {
-    val color = Red()
-    color.p()
-}
+import java.util.*
 
 interface Color {
     val id: Long
@@ -14,7 +8,6 @@ interface Color {
     fun p() {
         println("color: $color")
     }
-
 }
 
 class Red(override val id: Long = UUID.randomUUID().mostSignificantBits) : Color {

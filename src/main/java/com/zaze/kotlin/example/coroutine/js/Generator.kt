@@ -64,6 +64,7 @@ class GeneratorIterator<T>(
         MyLog.i("Generator", "resume 1")
         when (val currentState = state) {
             is State.NotReady -> currentState.continuation.resume(Unit)
+            else -> {}
         }
         MyLog.i("Generator","resume 2")
     }

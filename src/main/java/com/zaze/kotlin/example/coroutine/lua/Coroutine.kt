@@ -132,6 +132,7 @@ class Coroutine<P, R>(
                 (previousStatus as Status.Yielded<P>).continuation.resume(value)
                 println("previousStatus Status.Yielded 2: ${value} ")
             }
+            else -> {}
         }
     }
 
@@ -150,7 +151,7 @@ class Dispatcher : ContinuationInterceptor {
         return DispatcherContinuation(continuation, executor)
     }
 }
-
+// 协程调度器
 class DispatcherContinuation<T>(val continuation: Continuation<T>, val executor: Executor) :
     Continuation<T> by continuation {
 

@@ -15,20 +15,39 @@ fun main() {
 //    Vararg.debug()
 //    Infix.debug()
 
-    Thread.sleep(1000L)
-    repeat(10, ::doSSS)
-
-
+//    Thread.sleep(1000L)
+//    repeat(10, ::doSSS)
     val strList = listOf("1", "1", "1", "1", "1", "1", "1")
 
-    strList.map aa@{
-        return@aa
+
+    with("") loop@{
+        strList.map aa@{aa ->
+            println("aa: $aa")
+            if(aa === "1") {
+                return@loop
+            }
+        }
     }
 
-    println(strList.fold(0, { r, t ->
-        println(r)
-        r + t.toInt()
-    }))
+    run loop@{
+        listOf(1, 2, 3).forEach { // 闭包：访问了 sum
+            println("bb: $it")
+            for (i in 0 until 3) {
+                println("cc: $i")
+                break
+            }
+            if(it == 2) {
+                return@loop
+            }
+        }
+    }
+
+
+
+//    println(strList.fold(0, { r, t ->
+//        println(r)
+//        r + t.toInt()
+//    }))
 
 //    val set1 = setOf("1", "2")
 //    val set2 = setOf("1", "2")

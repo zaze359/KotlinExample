@@ -55,7 +55,7 @@ fun main() {
 // ----------------------------------------------------------------------------
 
 /**
- *  Kind<out F, out A> 为 类型构造器F 应用参数A后产生的类型
+ *  Kind<out F, out A> 为 类型构造器F应用参数A后 产生的类型
  */
 interface Kind<out F, out A>
 
@@ -119,6 +119,7 @@ object ListFunctor : Functor<List.K> {
     }
 
     override fun <A> Kind<List.K, A>.show(a: Show<A>): String {
+        // fa 就是 Kind<List.K, A>
         val fa = this
         return "[" + ListFunctor.run {
             fa.fold(listOf<String>())() { r, i ->

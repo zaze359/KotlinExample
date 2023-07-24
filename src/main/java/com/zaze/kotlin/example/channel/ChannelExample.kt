@@ -10,6 +10,8 @@ import kotlinx.coroutines.channels.Channel
 
 fun main() = runBlocking {
     var channel = Channel<Int>()
+    // 默认RENDEZVOUS send会挂起，必须等待接收
+    // CONFLATED 不挂起，但是仅保留最新的一个。
 //    channel = Channel<Int>(onBufferOverflow = BufferOverflow.DROP_OLDEST) // 效果等同 capacity = Channel.CONFLATED
     channel = Channel(capacity = Channel.CONFLATED,  onUndeliveredElement = { i ->
         println("channel onUndeliveredElement $i")

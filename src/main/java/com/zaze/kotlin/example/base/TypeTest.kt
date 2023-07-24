@@ -1,5 +1,7 @@
 package com.zaze.kotlin.example.base
 
+import com.google.gson.Gson
+
 
 fun main() {
 //    println("type: ${getType<String>()}")
@@ -8,6 +10,10 @@ fun main() {
     val src = arrayOf(1.0, 2.0, 3.0)
     copyIn(dest, src)
     copyOut(dest, src)
+
+    val gson = Gson()
+    gson.fromJson("aa", String::class.java)
+
 }
 
 // ------------------------------------
@@ -28,30 +34,34 @@ class Watermelon(weight: Double) : Fruit(weight), Ground
 fun <T> cut(t: T) where T : Fruit, T : Ground {}
 
 // ------------------------------------
-// 逆变；
-// 此处 T 是Double
-// <in T> 表示接收可以接收 Double的父类， Array<Number> 是 Array<Double> 的子类
+// 使用处型变，逆变；
+// T 是 Double，<in T> 表示可以接收 Double的父类。
+// Number 是 Double的父类，Array<Number> 是 Array<Double> 的子类
 inline fun <reified T> copyIn(dest: Array<in T>, src: Array<T>) {
     src.forEachIndexed { index, t ->
         dest[index] = t
     }
-//    // 由于 in 修饰，此处时无法读取到正确的数值的，返回的是 Any?
-//    val a: T = dest[0]
-//    src[0] = a
-    println("copyIn: ${T::class.java}")
+    println("copyIn T: ${T::class.java}")
+    // 由于 in 修饰，此处时无法读取到正确的数值的，返回的是 Any?
+    val a: T = dest[0] as T
+
+
+    src[0] = a
 }
 
 // 协变；
-// 此处 T 是Number
-// <out T> 表示接收可以接收 Number 的子类，Array<Number> 是 Array<Double> 的父类
+// T 是Number，<out T> 表示可以接收 Number 的子类
+// Number是Double的父类，Array<Number> 是 Array<Double> 的父类
 inline fun <reified T> copyOut(dest: Array<T>, src: Array<out T>) {
     src.forEachIndexed { index, t ->
         dest[index] = t
     }
-//    val a:T = dest[0]
+    println("copyOut T: ${T::class.java}")
+    val a: T = dest[0]
 //    // 由于 out 修饰，此处无法赋值
+    // out 修饰，无法赋值，只能调用get获取 src中的值
+    // 父类Number 无法赋值给 子类Double
 //    src[0] = a
-    println("copyOut: ${T::class.java}")
 }
 
 // ------------------------------------

@@ -1,25 +1,42 @@
 package com.zaze.kotlin.example.coroutine
 
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.AbstractCoroutineContextElement
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.*
 
 fun main() = runBlocking {
     var coroutineContext: CoroutineContext = EmptyCoroutineContext
-    coroutineContext += CoroutineName("")
-    coroutineContext += CoroutineName("")
+    coroutineContext += CoroutineExceptionHandler {
+        println("CoroutineExceptionHandler")
+    }
+    coroutineContext += CoroutineName("TestContext")
+
+    suspend {
+        println("createCoroutine start")
+        "start"
+    }.createCoroutine(object : Continuation<String> {
+        override val context: CoroutineContext
+            get() = coroutineContext
+
+        override fun resumeWith(result: Result<String>) {
+            println("result: $result")
+            println("CoroutineName: ${context[CoroutineName]}}")
+            println("CoroutineExceptionHandler: ${context[CoroutineExceptionHandler]}}")
+        }
+
+    }).resume(Unit)
 
 }
-class CoroutineName(val name: String) : AbstractCoroutineContextElement(Key) {
-    companion object Key : CoroutineContext.Key<CoroutineName>
-}
 
-class CoroutineExceptionHandler(val onerrorAction: (Throwable) -> Unit) : AbstractCoroutineContextElement(Key) {
+//class CoroutineName(val name: String) : AbstractCoroutineContextElement(Key) {
+//    companion object Key : CoroutineContext.Key<CoroutineName>
+//}
+
+class CoroutineExceptionHandler(val onErrorAction: (Throwable) -> Unit) : AbstractCoroutineContextElement(Key) {
     companion object Key : CoroutineContext.Key<CoroutineExceptionHandler>
 
     fun onError(error: Throwable) {
         error.printStackTrace()
-        onerrorAction(error)
+        onErrorAction(error)
     }
 }

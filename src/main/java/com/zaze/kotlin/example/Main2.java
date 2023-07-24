@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author chen
- * 2021-07-23
- **/
 public class Main2 {
 
     public int solution(int n, int m) {
@@ -36,8 +32,9 @@ public class Main2 {
     }
 
     public int count = 0;
+
     public void dfs(int n, int m, boolean flag, String curr) {
-        count ++;
+        count++;
         if (m > 9 * n) {
             return;
         }
@@ -49,7 +46,9 @@ public class Main2 {
             }
         }
     }
+
     public static void main(String[] args) {
         System.out.println(new Main2().solution(10, 30));
     }
 }
+

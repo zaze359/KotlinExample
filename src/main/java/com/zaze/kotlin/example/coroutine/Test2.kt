@@ -32,7 +32,7 @@ fun main() = runBlocking {
  */
 suspend fun a(coroutineScope: CoroutineScope) {
     val job =
-        coroutineScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             repeat(1000) { i ->
                 println("job: I'm sleeping $i ...")
                 delay(500L)

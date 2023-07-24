@@ -7,6 +7,7 @@ import kotlin.coroutines.*
 fun main() {
     launchCoroutine(ProducerScope<Int>()) {
         MyLog.i("CreateCoroutine2", "launchCoroutine 11111111")
+        this.produce(111)
     }
 }
 
