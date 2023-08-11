@@ -6,8 +6,7 @@ fun main() {
 //    println("sub: ${"11".subSequence(1, "11".length)}")
 //    println("sub: ${"112222".take(2)}")
 //    "112222".repeat(2)
-//    println("TestConst.sb: ${TestConst.sb}")
-//    println("TestConst.a: ${TestConst().a}")
+
 //    println("a: ${splitByOperator("x+5-3+x=6+x-2")}")
 
 //    println("ssr+: ${avg(55, 20, 7)}")
@@ -16,8 +15,15 @@ fun main() {
 //    println("scrolls: ${8 / avg(65, 16, 6)}")
 //    println("scrolls: ${8 / avg(55, 20, 7)}")
 
+//    println("char a: " + 'a'.code)
+//    println("char b: " + 'b'.code)
+//    println("aaaa: ${aaa(2, 3)}")
 
-    println("aaaa: ${aaa(2, 3)}")
+    repeat(10) {
+        println("repeat: $it start")
+        if(it == 2) return@repeat
+        println("repeat: $it end")
+    }
 
 //    val result = Sort.bubbleSort(intArrayOf(6, 3, 2, 4, 5, 1))
 
@@ -25,7 +31,7 @@ fun main() {
 //    color.p()
 }
 
-
+// 快速求幂测试
 fun aaa(a: Int, n: Int): Int {
     var indexNum = a // 底数
     var pow = n // 幂次

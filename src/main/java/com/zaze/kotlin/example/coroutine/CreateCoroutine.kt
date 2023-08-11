@@ -11,10 +11,11 @@ const val TAG = "CreateCoroutine"
  * 创建协程体: createCoroutine
  * 需要调用 resume启动
  */
-val continuation = suspend {  // 协程体
+val continuation = suspend {
     MyLog.i(TAG, "In Coroutine 1")
-    fun1()
-    fun2()
+    val fun1 = fun1()
+    MyLog.i(TAG, "In Coroutine fun1: $fun1")
+//    fun2()
     1
 }.createCoroutine(object : Continuation<Int> {
     override val context: CoroutineContext
@@ -27,39 +28,42 @@ val continuation = suspend {  // 协程体
 })
 
 fun main() {
+    Thread {
+        Thread.sleep(5_000)
+        continuationTemp?.resume(100)
+    }.start()
     // 调用resume()启动协程
-    val r = continuation.resume(Unit)
+    continuation.resume(Unit)
     // 等同上方，实际 resume 就是调用的这个方法。
 //    continuation.resumeWith(Result.success(Unit))
-    MyLog.i(TAG, "main $r")
-
 }
 
-
-suspend fun fun1() = suspendCoroutine<Int> {
+private var continuationTemp: Continuation<Int>? = null
+suspend fun fun1() = suspendCoroutine<Int> { continuation ->
     MyLog.i(TAG, "fun1")
-    it.resume(100)
+    // 100 将会作为 调用处的返回值
+    continuationTemp = continuation
+//    continuation.resume(100)
 }
 
 suspend fun fun2() = suspendCancellableCoroutine<Unit>{continuation ->
     continuation.invokeOnCancellation {  }
-
     MyLog.i(TAG, "fun2")
 }
 
-
-/**
- * 创建并立即执行 : startCoroutine
- */
-val continuation2 = suspend {
-    MyLog.i(TAG, "In Coroutine 2")
-    2
-}.startCoroutine(object : Continuation<Int> {
-    override val context: CoroutineContext
-        get() = EmptyCoroutineContext
-
-    override fun resumeWith(result: Result<Int>) {
-        MyLog.i(TAG, "Coroutine2 End: $result")
-    }
-})
+//
+///**
+// * 创建并立即执行 : startCoroutine
+// */
+//val continuation2 = suspend {
+//    MyLog.i(TAG, "In Coroutine 2")
+//    2
+//}.startCoroutine(object : Continuation<Int> {
+//    override val context: CoroutineContext
+//        get() = EmptyCoroutineContext
+//
+//    override fun resumeWith(result: Result<Int>) {
+//        MyLog.i(TAG, "Coroutine2 End: $result")
+//    }
+//})
 

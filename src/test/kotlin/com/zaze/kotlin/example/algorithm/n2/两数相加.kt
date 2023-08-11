@@ -1,5 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n2
 
+import com.zaze.kotlin.example.algorithm.ListNode
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 
@@ -13,9 +14,9 @@ class TestSolution {
 
     private fun check(l1Array: IntArray, l2Array: IntArray, answerArray: IntArray) {
         val solution = Solution()
-        val l1: Solution.ListNode? = buildNode(l1Array)
-        val l2: Solution.ListNode? = buildNode(l2Array)
-        var answer: Solution.ListNode? = buildNode(answerArray)
+        val l1: ListNode? = ListNode.buildNode(l1Array)
+        val l2: ListNode? = ListNode.buildNode(l2Array)
+        var answer: ListNode? = ListNode.buildNode(answerArray)
         var result = solution.addTwoNumbers(l1, l2)
         while (true) {
             val value1 = answer?.`val`
@@ -28,21 +29,5 @@ class TestSolution {
                 return
             }
         }
-    }
-
-
-    private fun buildNode(array: IntArray): Solution.ListNode? {
-        var rootNode: Solution.ListNode? = null
-        var listNode: Solution.ListNode? = null
-        array.forEach {
-            if (rootNode == null) {
-                rootNode = Solution.ListNode(it)
-                listNode = rootNode
-            } else {
-                listNode?.next = Solution.ListNode(it)
-                listNode = listNode?.next
-            }
-        }
-        return rootNode
     }
 }

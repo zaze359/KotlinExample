@@ -17,24 +17,29 @@ open class TreeNode(var `val`: Int) {
             } ?: null
         }
 
-        // 给定一个数组 构建一颗二叉树
+        /**
+         * 给定一个数组 构建一颗二叉树
+         * [list]: 数组数据
+         */
         fun buildTree(list: List<Int?>): TreeNode? {
 //            val queue = ArrayDeque<TreeNode?>()
             val queue = LinkedList<TreeNode?>()
             val root = createNode(list[0])?.also {
                 queue.add(it)
             }
-            var i = 0
-            while (i < list.size) {
-                val first = queue.removeFirst()
-                i++
-                if (first != null && i < list.size) {
-                    first.left = createNode(list[i]).also {
-                        queue.add(it)
+            var index = 0
+            while (index < list.size) {
+                val first = queue.poll()
+                if (first != null) {
+                    index++
+                    if (index < list.size) {
+                        first.left = createNode(list[index]).also {
+                            queue.add(it)
+                        }
                     }
-                    i++
-                    if (i < list.size) {
-                        first.right = createNode(list[i]).also {
+                    index++
+                    if (index < list.size) {
+                        first.right = createNode(list[index]).also {
                             queue.add(it)
                         }
                     }
@@ -49,42 +54,66 @@ open class TreeNode(var `val`: Int) {
     }
 
     /**
-     * 层序遍历输出,包括null
+     * 按层序遍历输出,包括null
+     * 广度优先
      */
-    fun depthPrint(): String {
-        val builder = StringBuilder()
-        // 用于记录需要输出的节点
+    fun levelPrint(): String {
+        // 用于记录待处理的节点
         val queue = LinkedList<TreeNode?>()
         // 首先添加自己
         queue.add(this)
         // 记录一下 空节点，若队列中都是空节点，那么就不必继续输出了，作用就是过滤末尾的所有空节点输出
         var nullCount = 0
-        while (queue.isNotEmpty() && queue.size > nullCount) {
-            // 取出自己，然后将左右节点加入到队列中
-            val first = queue.removeFirst()
-            if (first != null) {
-                queue.add(first.left)
-                queue.add(first.right)
-                if (first.left == null) {
-                    nullCount++
-                }
-                if (first.right == null) {
-                    nullCount++
-                }
-            } else {
-                nullCount--
+        // 记录输出的节点值
+        val outList = ArrayList<Int?>()
+        while (queue.isNotEmpty()) {
+            val levelSize = queue.size
+            if (nullCount == levelSize) {
+                // 队列中都是空节点
+                break
             }
-            if (builder.isEmpty()) {
-                builder.append("${first?.`val`}")
-            } else {
-                builder.append(",${first?.`val`}")
+            repeat(levelSize) {
+                // 取出自己，然后将左右节点加入到队列中
+                val first = queue.poll()
+                var needPrint = true
+                // 只要自身不是null, 就添加 左右子节点到队列中
+                if (first != null) {
+                    queue.add(first.left)
+                    queue.add(first.right)
+                    if (first.left == null) {
+                        nullCount++
+                    }
+                    if (first.right == null) {
+                        nullCount++
+                    }
+                } else {
+                    nullCount--
+                }
+                outList.add(first?.`val`)
+            }
+        }
+        val builder = StringBuilder()
+        outList.forEachIndexed { index, value ->
+            when {
+                value == null && index == outList.size - 1 -> {
+                    // 去除末尾的 NULL
+                }
+
+                builder.isEmpty() -> {
+                    builder.append("$value")
+                }
+
+                else -> {
+                    builder.append(",$value")
+                }
             }
         }
         return builder.toString()
     }
 
     /**
-     * 层序遍历
+     * 按层序遍历输出
+     * 广度优先
      */
     fun levelOrder(): List<List<Int>> {
         val result = mutableListOf<List<Int>>()

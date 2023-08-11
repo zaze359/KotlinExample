@@ -1,0 +1,70 @@
+package com.zaze.kotlin.example.algorithm.n1631
+
+import java.util.LinkedList
+
+/**
+ * 最小体力消耗路径
+ * 最平缓路径
+ * 可上下左右移动
+ * 找出路径中相邻格子的最小差值
+ */
+class Solution {
+    // 定义4个移动方向，上下左右
+    var dirs = arrayOf(intArrayOf(-1, 0), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(0, 1))
+    fun minimumEffortPath(heights: Array<IntArray>): Int {
+        return minimumEffortPath1(heights)
+    }
+
+    /**
+     * 二分查找，mxn的图 可以对应 [0, mn) 区间内的整数。
+     * 假设存在 路径n，满足从左上到右下。n 的取值在 [left ~ right] 区间内，一开始取[0, 999999]
+     * 我们先取 中间位置 x = (left + right) / 2，广度遍历 看看是否能也能到达。若能 则在 [left ~ x) 间再 二分查找
+     * 若不能则再 (x, right] 间 二分查找。
+     * 直到找到最小满足条件的那个
+     */
+    private fun minimumEffortPath1(heights: Array<IntArray>): Int {
+        val row = heights.size // 行
+        val column = heights[0].size // 列
+        // 取两边，最大值
+        var left = 0
+        var right = 999999
+        var ans = 0
+        while (left <= right) { // 二分查找 退出条件 left > right
+            // 将满足条件路径长度的一半，来判断是否能到达右下
+            val min = (left + right).shr(1) // 二分
+            val queue = LinkedList<Pair<Int, Int>>()
+            queue.push(0 to 0)
+            val seen = BooleanArray(row * column) // 记录哪些位置已经走过了，过滤重复计算
+            seen[0] = true
+            while (queue.isNotEmpty()) {
+                val (x, y) = queue.pop()
+                // 遍历 上下左右四个操作
+                repeat(4) {
+                    // 下一个位置
+                    val nextX = x + dirs[it][0]
+                    val nextY = y + dirs[it][1]
+                    val index = nextX * column + nextY
+                    // 没有越界 && next位置之前还未走到过 && 该次行动的路径长度<=min
+                    if (nextX in 0 until row && nextY in 0 until column && !seen[index] && Math.abs(
+                            heights[x][y] - heights[nextX][nextY]
+                        ) <= min
+                    ) {
+                        // 路径可达，加入队列，只要确定可达即可，这里不用关心是否是最小
+                        queue.push(nextX to nextY)
+                        // 记录已经来过
+                        seen[index] = true
+                    }
+                }
+            }
+            // 该次二分结束
+            if (seen[row * column - 1]) { // 能到达右下角了
+                // 先记录下路径，接着再看看有没有更小的路径
+                ans = min
+                right = min - 1
+            } else { // 按照min路径长度，无法到达右下，那么往更大的路径长度中找。
+                left = min + 1
+            }
+        }
+        return ans
+    }
+}

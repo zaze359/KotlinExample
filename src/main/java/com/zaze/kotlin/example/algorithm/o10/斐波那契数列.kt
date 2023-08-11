@@ -68,13 +68,14 @@ class Solution {
     }
 
     /**
-     * 快速幂求 求数组 array的 n次方
+     * 快速幂 求数组 array的 n次方
      * O(logn)
      */
     private fun pow(a: Array<IntArray>, n: Int): Array<IntArray> {
         var matrix = a // 底数
         var pow = n // 幂次
-        var ret = arrayOf(intArrayOf(1, 0), intArrayOf(0, 1)) // 结果，初始是一个单位矩阵
+        // 保存结果，初始值是一个单位矩阵
+        var ret = arrayOf(intArrayOf(1, 0), intArrayOf(0, 1))
         var i = 1
         while (pow > 0) {
             println("------------ ${i ++}")
@@ -100,8 +101,9 @@ class Solution {
      */
     private fun multiply(a: Array<IntArray>, b: Array<IntArray>): Array<IntArray> {
         val ret = arrayOf(intArrayOf(0, 0), intArrayOf(0, 0))
-        for (i in 0 until 2) { // 列
-            for (j in 0 until 2) { // 行
+        // 行列
+        for (i in 0 until 2) { //
+            for (j in 0 until 2) { //
                 ret[i][j] = ((a[i][0].toLong() * b[0][j] + a[i][1].toLong() * b[1][j]) % mod).toInt()
             }
         }

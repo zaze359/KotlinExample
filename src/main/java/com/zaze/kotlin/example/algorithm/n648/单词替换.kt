@@ -26,7 +26,7 @@ class Solution {
         // 分隔字符进行存储，空间复杂度 O(s) sentence的字符数
         val words: MutableList<String> = sentence.split(" ").toMutableList()
         // 时间复杂度: O(s) sentence的字符数
-        words.forEachIndexed { index, word -> // // 遍历次数 = 单词数量
+        words.forEachIndexed { index, word -> // 遍历次数 = 单词数量
             trie.searchRoot(word)?.let {// searchRoot内部会遍历字符，时间复杂度O(n)
                 words[index] = it
             }

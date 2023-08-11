@@ -17,8 +17,8 @@ class LogInterceptor : ContinuationInterceptor {
 class LogContinuation<T>(private val continuation : Continuation<T>) : Continuation<T> by continuation {
 
     override fun resumeWith(result: Result<T>) {
-        println("before resumeWith: $result")
+        println("--- before resumeWith: $result")
         continuation.resumeWith(result)
-        println("after resumeWith.")
+        println("--- after resumeWith.")
     }
 }

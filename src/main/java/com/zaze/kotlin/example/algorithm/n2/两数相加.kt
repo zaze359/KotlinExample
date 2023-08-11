@@ -1,5 +1,7 @@
 package com.zaze.kotlin.example.algorithm.n2
 
+import com.zaze.kotlin.example.algorithm.ListNode
+
 /**
  * 两个非空链表，表示两个非负整数，内部数字 逆序 排列。
  * 输出相同格式的 两数之和。
@@ -41,10 +43,6 @@ class Solution {
                 newNode
             }
         }
-    }
-
-    class ListNode(var `val`: Int) {
-        var next: ListNode? = null
     }
 }
 
