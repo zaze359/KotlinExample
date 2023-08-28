@@ -1,8 +1,7 @@
 package com.zaze.kotlin.example.coroutine
 
 import com.zaze.kotlin.example.MyLog
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
 const val TAG = "CreateCoroutine"
@@ -46,8 +45,8 @@ suspend fun fun1() = suspendCoroutine<Int> { continuation ->
 //    continuation.resume(100)
 }
 
-suspend fun fun2() = suspendCancellableCoroutine<Unit>{continuation ->
-    continuation.invokeOnCancellation {  }
+suspend fun fun2() = suspendCancellableCoroutine<Unit> { continuation ->
+    continuation.invokeOnCancellation { }
     MyLog.i(TAG, "fun2")
 }
 

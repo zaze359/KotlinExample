@@ -15,29 +15,47 @@ val tag = "coroutine"
 
 
 fun main() = runBlocking {
-    println("main 1 ${currentCoroutineContext()}")
-    val deferred: Deferred<String> = async {
-        println("main 2 ${currentCoroutineContext()}")
-        println("In async:${Thread.currentThread().name}")
-        delay(1000L) // 模拟耗时操作
-        println("In async after delay!")
-        return@async "Task completed!"
+//    println("main 1 ${currentCoroutineContext()}")
+//    val deferred: Deferred<String> = async {
+//        println("main 2 ${currentCoroutineContext()}")
+//        println("In async:${Thread.currentThread().name}")
+//        delay(1000L) // 模拟耗时操作
+//        println("In async after delay!")
+//        return@async "Task completed!"
+//    }
+//    println("main 3 ${currentCoroutineContext()}")
+//    // 不再调用 deferred.await()
+//    delay(2000L)
+//    println("main 4 ${currentCoroutineContext()}")
+//    println("main end!")
+//
+    withContext(Dispatchers.Default) {
+        repeat(100) {
+//            println("context Default: ${Thread.currentThread()}")
+            delay(100)
+        }
     }
-    println("main 3 ${currentCoroutineContext()}")
-    // 不再调用 deferred.await()
-    delay(2000L)
-    println("main 4 ${currentCoroutineContext()}")
-    println("main end!")
+    MainScope()
+
+    withContext(Dispatchers.IO) {
+        repeat(1000) {
+            println("context IO: ${Thread.currentThread()}")
+            delay(1000)
+        }
+    }
+
+//    main2()
 }
+
 fun main2() = runBlocking {
     log(tag, "---- start");
 
-//    launch {
-//        repeat(10) {
-//            log(tag, "launching")
-//            delay(100L)
-//        }
-//    }
+    launch(Dispatchers.IO) {
+        repeat(10) {
+            log(tag, "launching")
+            delay(100L)
+        }
+    }
 //        val result = testSuspendable("testSuspendable")
 //        log(tag, "main result: $result ")
 

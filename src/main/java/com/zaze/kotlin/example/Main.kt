@@ -2,6 +2,22 @@ package com.zaze.kotlin.example
 
 import com.zaze.kotlin.example.test.Red
 
+
+class A1 {
+    var a = 0
+    fun a() {
+        Runnable { a = 4 }
+        Runnable { a = 4 }.run()
+        Runnable { a = 4 }.run()
+        Runnable { a = 4 }.run()
+        b({})
+    }
+
+    fun b(b: ()-> Unit) {
+
+    }
+}
+
 fun main() {
 //    println("sub: ${"11".subSequence(1, "11".length)}")
 //    println("sub: ${"112222".take(2)}")
@@ -19,10 +35,17 @@ fun main() {
 //    println("char b: " + 'b'.code)
 //    println("aaaa: ${aaa(2, 3)}")
 
-    repeat(10) {
-        println("repeat: $it start")
-        if(it == 2) return@repeat
-        println("repeat: $it end")
+//    repeat(10) {
+//        println("repeat: $it start")
+//        if(it == 2) return@repeat
+//        println("repeat: $it end")
+//    }
+
+    var a = 2
+    object : Runnable {
+        override fun run() {
+            a = 3
+        }
     }
 
 //    val result = Sort.bubbleSort(intArrayOf(6, 3, 2, 4, 5, 1))
