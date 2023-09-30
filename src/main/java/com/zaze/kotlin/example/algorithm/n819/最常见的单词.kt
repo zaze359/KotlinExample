@@ -17,14 +17,13 @@ class Solution {
      */
     fun mostCommonWord(paragraph: String, banned: Array<String>): String {
         return paragraph
-//            .toLowerCase()
-            .lowercase()
-            .replace("[^a-z]".toRegex(), " ")
-            .split("\\s+".toRegex())
-            .filter {
+            .lowercase()// 转小写
+            .replace("[^a-z]".toRegex(), " ") // 正则将所有 a-z 之外的字符都替换空格
+            .split("\\s+".toRegex())// 分割
+            .filter {// 过滤
                 it.isNotEmpty() && it !in banned
             }
-            .groupBy {
+            .groupBy {// 分组计数
                 it
             }
             .maxByOrNull {

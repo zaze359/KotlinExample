@@ -23,11 +23,12 @@ class Trie {
         var node = this
         word.forEach { c ->
             val index = getCharIndex(c)
+            // 查找是否存在对应子节点
             if (node.children[index] == null) {
-                // 子节点中不存在这个字符，添加一个节点。
+                // 不存在这个字符的子节点，添加一个子节点。
                 node.children[index] = Trie()
             }
-            // node指向 当前字符对应的子节点
+            // 将node指向 当前字符对应的子节点
             node.children[index]?.let {
                 node = it
             }

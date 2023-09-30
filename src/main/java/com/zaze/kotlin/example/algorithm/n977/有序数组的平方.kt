@@ -8,7 +8,7 @@ package com.zaze.kotlin.example.algorithm.n977
 class Solution {
     /**
      * 双指针
-     * 分别指向 0, n-1，一个向后 一个向前 遍历，谁大谁推进一步.
+     * 分别指向 0, n-1，一个向后遍历 一个向前遍历，谁大谁推进一步.
      * 从大到小填充结果
      */
     fun sortedSquares(nums: IntArray): IntArray {

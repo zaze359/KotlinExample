@@ -9,7 +9,7 @@ import com.zaze.kotlin.example.algorithm.o62.Trie
 class Solution {
     /**
      * 将 sentence 中的 继承词 使用词根替换，优先 最短的词根。
-     * [dictionary]: 许多词根组成的词典。["cat","bat","rat"]
+     * [dictionary]: 词根组成的词典。["cat","bat","rat"]
      * [sentence]: 空格分隔单词形成的句子。例如 "the cattle was rattled by the battery"
      * 时间复杂度： O(d + s) 词根字符数 + 句子字符数
      * 空间复杂度： O(d + s) 词根字符数 + 句子字符数

@@ -12,7 +12,3 @@ class Solution {
         it !in vowels
     }
 }
-
-fun main() {
-    println(Solution().removeVowels("ae1122io3ua4e5i6o7u8a89e9i9o9uk9a9e9i9ouaaekai23kkou"))
-}

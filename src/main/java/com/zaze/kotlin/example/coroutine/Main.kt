@@ -28,40 +28,42 @@ fun main() = runBlocking {
 //    delay(2000L)
 //    println("main 4 ${currentCoroutineContext()}")
 //    println("main end!")
-//
-    withContext(Dispatchers.Default) {
-        repeat(100) {
-//            println("context Default: ${Thread.currentThread()}")
-            delay(100)
-        }
-    }
-    MainScope()
 
-    withContext(Dispatchers.IO) {
-        repeat(1000) {
-            println("context IO: ${Thread.currentThread()}")
-            delay(1000)
-        }
-    }
+//    withContext(Dispatchers.Default) {
+//        repeat(100) {
+////            println("context Default: ${Thread.currentThread()}")
+//            delay(100)
+//        }
+//    }
 
-//    main2()
+//    MainScope()
+
+//    withContext(Dispatchers.IO) {
+//        repeat(1000) {
+//            println("context IO: ${Thread.currentThread()}")
+//            delay(1000)
+//        }
+//    }
+
+    main2()
 }
 
 fun main2() = runBlocking {
     log(tag, "---- start");
 
-    launch(Dispatchers.IO) {
-        repeat(10) {
-            log(tag, "launching")
-            delay(100L)
-        }
-    }
+//    launch(Dispatchers.IO) {
+//        repeat(10) {
+//            log(tag, "launching")
+//            delay(100L)
+//        }
+//    }
+
 //        val result = testSuspendable("testSuspendable")
 //        log(tag, "main result: $result ")
 
-    withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
-        log(tag, "aaaa: ${aa()}")
-    }
+//    withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
+//        log(tag, "aaaa: ${aa()}")
+//    }
 
 //    withContext(Dispatchers.IO) {
 //        val file = File(".")
@@ -70,29 +72,31 @@ fun main2() = runBlocking {
 //
 //        println("--------------- fun a start ------------------")
 //        log(tag, "main start")
-    log(tag, "main result: ${testSuspendable("testSuspendable")} ")
+//    log(tag, "main result: ${testSuspendable("testSuspendable")} ")
 
 //        log(tag, "main finish")
 //
 //        FileUtils.deleteFile(File("testRes/async"))
-//        val start = System.currentTimeMillis()
-//        val async1 = async(start = CoroutineStart.LAZY) {
-//            delay(1000L)
-//            System.currentTimeMillis() - start
-//        }
-//        val async2 = async(start = CoroutineStart.LAZY) {
-//            delay(1000L)
-//            System.currentTimeMillis() - start
-//        }
-//        // start 和 未start 时间不同
-//        async1.start()
-//        async2.start()
-//        val one = async1.await()
-//        val two = async2.await()
-//        log(tag, "async $one+$two/${one + two}(${System.currentTimeMillis() - start}) finish")
-//    }
+    val start = System.currentTimeMillis()
+    // 默认调用async时 就立即执行。
+    // LAZY , 并不会立即执行，需要调用 start或者 await后才开始执行
+    val async1 = async(start = CoroutineStart.LAZY) {
+        delay(5000L)
+        System.currentTimeMillis() - start
+    }
+    val async2 = async(start = CoroutineStart.LAZY) {
+        delay(5000L)
+        System.currentTimeMillis() - start
+    }
+//        // start 启动， await 启动并获取结果
+//    async1.start()
+//    async2.start()
+    delay(5000L)
+    val one = async1.await()
+    log(tag, "async111")
+    val two = async2.await()
+    log(tag, "async222 $one+$two/${one + two}(${System.currentTimeMillis() - start}) finish")
     log(tag, "---- finish");
-
 }
 
 private fun startCoroutine() {
@@ -104,6 +108,7 @@ private fun startCoroutine() {
 //    }
 //    GlobalScope.launch(Dispatchers.Default, block = funTest)
 }
+
 
 suspend fun testSuspendable(url: String): Any? {
     log(tag, "---- testSuspendable start");

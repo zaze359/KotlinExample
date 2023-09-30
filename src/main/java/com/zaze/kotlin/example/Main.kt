@@ -13,6 +13,7 @@ class A1 {
         b({})
     }
 
+
     fun b(b: ()-> Unit) {
 
     }

@@ -13,6 +13,7 @@ import com.zaze.kotlin.example.algorithm.ListNode
  */
 class Solution {
     /**
+     * 升序
      * 时间复杂度 O(n + m) 最大不会超过 m + n, n,m两个链表的长度，
      */
     fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
@@ -53,6 +54,7 @@ class Solution {
                 list1.next = mergeTwoLists2(list1.next, list2)
                 return list1
             }
+
             else -> {
                 list2.next = mergeTwoLists2(list1, list2.next)
                 return list2

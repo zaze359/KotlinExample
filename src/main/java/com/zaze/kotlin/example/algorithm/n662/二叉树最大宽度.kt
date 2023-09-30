@@ -1,4 +1,4 @@
-package com.zaze.kotlin.example.algorithm.n622
+package com.zaze.kotlin.example.algorithm.n662
 
 import com.zaze.kotlin.example.algorithm.TreeNode
 import java.util.*

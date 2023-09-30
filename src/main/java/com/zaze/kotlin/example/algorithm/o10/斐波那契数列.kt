@@ -3,8 +3,10 @@ package com.zaze.kotlin.example.algorithm.o10
 
 /**
  * 求 斐波那契数列 的第 n 项 f(n)
+ * f(n)=f(n-1)+f(n-2)
  */
 class Solution {
+    // 边界值
     private val mod = 1000000007
 
     /**
@@ -13,6 +15,8 @@ class Solution {
      * 自底向上自算
      */
     fun fib(n: Int): Int {
+        // (f(1) + f(2)) + f(3) ....
+
         return when {
             n < 2 -> {
                 n
@@ -78,7 +82,7 @@ class Solution {
         var ret = arrayOf(intArrayOf(1, 0), intArrayOf(0, 1))
         var i = 1
         while (pow > 0) {
-            println("------------ ${i ++}")
+            println("------------ ${i++}")
             if ((pow and 1) == 1) {
                 // 奇数 表示多出一个 indexNum，单独 和之前的结果 乘算一下
                 ret = multiply(ret, matrix)

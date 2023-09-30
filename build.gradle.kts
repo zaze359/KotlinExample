@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.8.0"
@@ -13,6 +12,12 @@ repositories {
 //        isAllowInsecureProtocol = true
 //        url = uri("http://localhost:8081/repository/maven-public")
 //    }
+    if (extra.has("useLocalMaven") && (extra["useLocalMaven"] as String).toBoolean()) {
+        maven {
+            isAllowInsecureProtocol = true
+            url = uri("http://localhost:8081/repository/maven-public")
+        }
+    }
     mavenLocal()
     maven(uri("https://maven.aliyun.com/repository/public"))
     maven(uri("https://maven.aliyun.com/repository/jcenter"))
