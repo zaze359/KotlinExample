@@ -10,6 +10,5 @@ class TestNode {
         val result = TreeNode.buildTree(listOf(1, 3, 2, 5, null, null, 9, 6, null, 7))
         println("result.levelPrint: ${result?.levelPrint()}")
         println("result.levelOrder: ${result?.levelOrder()}")
-
     }
 }

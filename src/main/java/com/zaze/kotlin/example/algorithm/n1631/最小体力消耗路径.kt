@@ -40,7 +40,7 @@ class Solution {
             while (queue.isNotEmpty()) {
                 val (x, y) = queue.pop()
                 // 遍历 上下左右四个操作
-                repeat(4) {
+                repeat(dirs.size) {
                     // 下一个位置
                     val nextX = x + dirs[it][0]
                     val nextY = y + dirs[it][1]

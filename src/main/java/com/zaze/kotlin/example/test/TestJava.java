@@ -7,6 +7,7 @@ public class TestJava {
 
 
     public static void main(String[] args) {
+        int[][] arr = new int[9][9];
 //        int a = 0;
 //        new Runnable() {
 //            @Override

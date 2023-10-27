@@ -3,7 +3,7 @@ package com.zaze.kotlin.example.algorithm
 import java.util.LinkedList
 
 /**
- * 树节点
+ * 二叉树
  */
 open class TreeNode(var `val`: Int) {
 
@@ -14,7 +14,7 @@ open class TreeNode(var `val`: Int) {
         private fun createNode(value: Int?): TreeNode? {
             return value?.let {
                 TreeNode(it)
-            } ?: null
+            }
         }
 
         /**
@@ -22,24 +22,24 @@ open class TreeNode(var `val`: Int) {
          * [list]: 数组数据
          */
         fun buildTree(list: List<Int?>): TreeNode? {
-//            val queue = ArrayDeque<TreeNode?>()
-            val queue = LinkedList<TreeNode?>()
-            val root = createNode(list[0])?.also {
-                queue.add(it)
-            }
+            if(list.isEmpty()) return null
+//            val queue = ArrayDeque<TreeNode?>() // 基于循环数组的 双端队列，存在扩容开销
+            val queue = LinkedList<TreeNode?>() // 基于链表的 双端队列
+            val root = createNode(list[0])
+            queue.add(root)
             var index = 0
             while (index < list.size) {
-                val first = queue.poll()
-                if (first != null) {
+                val firstNode = queue.poll()
+                if (firstNode != null) {
                     index++
                     if (index < list.size) {
-                        first.left = createNode(list[index]).also {
+                        firstNode.left = createNode(list[index]).also {
                             queue.add(it)
                         }
                     }
                     index++
                     if (index < list.size) {
-                        first.right = createNode(list[index]).also {
+                        firstNode.right = createNode(list[index]).also {
                             queue.add(it)
                         }
                     }
@@ -55,7 +55,8 @@ open class TreeNode(var `val`: Int) {
 
     /**
      * 按层序遍历输出,包括null
-     * 广度优先
+     * 广度优先 BFS
+     * 1, 3, 2, 5, null, null, 9, 6, null, 7
      */
     fun levelPrint(): String {
         // 用于记录待处理的节点
@@ -114,19 +115,20 @@ open class TreeNode(var `val`: Int) {
     /**
      * 按层序遍历输出
      * 广度优先
+     * [[1], [3, 2], [5, 9], [6, 7]]
      */
     fun levelOrder(): List<List<Int>> {
         val result = mutableListOf<List<Int>>()
         var levelList = mutableListOf<Int>()
         // 用于记录需要输出的节点
         val queue = LinkedList<TreeNode>()
-        // 首先添加自己
+        // 首先添加自己到末尾
         queue.add(this)
         while (queue.isNotEmpty()) {
             val levelSize = queue.size
             // 当前在队列中的就是当前层的节点
             repeat(levelSize) {
-                // 取出自己，然后将左右节点加入到队列中
+                // 取出第一个元素
                 val first = queue.poll()
                 levelList.add(first.`val`)
                 // 添加 左右子节点到队列中
