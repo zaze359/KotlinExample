@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n23
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 import org.junit.jupiter.api.Test
 
 import kotlin.test.assertContentEquals

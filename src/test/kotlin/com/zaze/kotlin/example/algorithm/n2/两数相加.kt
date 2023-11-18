@@ -1,8 +1,7 @@
 package com.zaze.kotlin.example.algorithm.n2
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
 
 class TestSolution {
     @Test

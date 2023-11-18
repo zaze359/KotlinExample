@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n876
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 
 /**
  * Example:

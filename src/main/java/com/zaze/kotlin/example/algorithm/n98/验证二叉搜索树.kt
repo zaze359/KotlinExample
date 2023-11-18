@@ -1,7 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n98
 
-import com.zaze.kotlin.example.algorithm.TreeNode
-import java.util.LinkedList
+import com.zaze.kotlin.example.algorithm.base.TreeNode
 
 /**
  * Example:

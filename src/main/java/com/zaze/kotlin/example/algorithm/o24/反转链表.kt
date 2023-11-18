@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.o24
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 
 /**
  * Example:
@@ -16,7 +16,7 @@ class Solution {
         var curNode: ListNode? = head
         var reverseHead: ListNode? = null
 
-        var next: ListNode? = null
+        var next: ListNode?
         while (curNode != null) {
             // 取出，暂存原始到后续链表
             next = curNode.next

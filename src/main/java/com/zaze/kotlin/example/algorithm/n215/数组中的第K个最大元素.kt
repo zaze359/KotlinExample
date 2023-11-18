@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n215
 
-import com.zaze.kotlin.example.algorithm.HeapSort
+import com.zaze.kotlin.example.algorithm.base.HeapSort
 
 /**
  * 定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。

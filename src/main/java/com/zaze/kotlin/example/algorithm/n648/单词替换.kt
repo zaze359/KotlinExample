@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n648
 
-import com.zaze.kotlin.example.algorithm.o62.Trie
+import com.zaze.kotlin.example.algorithm.base.Trie
 
 
 /**

@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n23
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 
 /**
  * 数组中的链表都已经按升序排列

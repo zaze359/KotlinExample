@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n2
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 
 /**
  * 两个非空链表，表示两个非负整数，内部数字 逆序 排列。

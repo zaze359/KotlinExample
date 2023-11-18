@@ -10,7 +10,7 @@ import java.util.LinkedList
  */
 class Solution {
     // 定义4个移动方向，上下左右
-    private var dirs = arrayOf(intArrayOf(-1, 0), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(0, 1))
+    private val dirs = arrayOf(intArrayOf(-1, 0), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(0, 1))
     fun minimumEffortPath(heights: Array<IntArray>): Int {
         return minimumEffortPath1(heights)
     }

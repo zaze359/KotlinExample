@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n141
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

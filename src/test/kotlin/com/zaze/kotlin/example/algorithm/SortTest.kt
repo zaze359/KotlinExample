@@ -1,8 +1,8 @@
 package com.zaze.kotlin.example.algorithm
 
+import com.zaze.kotlin.example.algorithm.base.Sort
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
 import kotlin.test.assertContentEquals
 
 class SortTest {

@@ -1,5 +1,6 @@
 package com.zaze.kotlin.example.algorithm
 
+import com.zaze.kotlin.example.algorithm.base.TreeNode
 import org.junit.jupiter.api.Test
 
 class TestNode {

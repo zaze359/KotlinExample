@@ -1,5 +1,6 @@
 package com.zaze.kotlin.example.algorithm
 
+import com.zaze.kotlin.example.algorithm.base.HeapSort
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContentEquals
 

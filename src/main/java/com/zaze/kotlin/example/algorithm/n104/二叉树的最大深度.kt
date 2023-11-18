@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n104
 
-import com.zaze.kotlin.example.algorithm.TreeNode
+import com.zaze.kotlin.example.algorithm.base.TreeNode
 
 class Solution {
     /**

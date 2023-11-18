@@ -1,8 +1,7 @@
 package com.zaze.kotlin.example.algorithm.n2530
 
-import com.zaze.kotlin.example.algorithm.HeapSort
+import com.zaze.kotlin.example.algorithm.base.HeapSort
 import java.util.PriorityQueue
-import kotlin.math.ceil
 
 /**
  * 给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。
@@ -35,7 +34,7 @@ class Solution {
      * 空间复杂度：O(n)
      */
     fun maxKelements2(nums: IntArray, k: Int): Long {
-        // 设置为从大到小排序
+        // 默认升序，改为从大到小 降序
         val heap = PriorityQueue<Int> { l, r ->
             r - l
         }

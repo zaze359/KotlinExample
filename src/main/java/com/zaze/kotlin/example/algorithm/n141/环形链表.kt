@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n141
 
-import com.zaze.kotlin.example.algorithm.ListNode
+import com.zaze.kotlin.example.algorithm.base.ListNode
 
 /**
  * 给你一个链表的头节点 head ，判断链表中是否有环。

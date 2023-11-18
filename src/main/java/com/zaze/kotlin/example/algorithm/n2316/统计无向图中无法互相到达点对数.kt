@@ -1,6 +1,6 @@
 package com.zaze.kotlin.example.algorithm.n2316
 
-import com.zaze.kotlin.example.algorithm.UnionFind
+import com.zaze.kotlin.example.algorithm.base.UnionFind
 
 /**
  * 返回 无法互相到达 的不同 点对数目
