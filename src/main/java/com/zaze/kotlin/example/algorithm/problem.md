@@ -44,6 +44,11 @@
     * 哈希表 + 位运算
 * [K 个元素的最大和](https://leetcode.cn/problems/maximum-sum-with-exactly-k-elements/description/)
   * 贪心 + 等差数列求和
+* [三个无重叠子数组的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)
+  * 动态规划
+  * 滑动窗口
+* [美化数组的最少删除数](https://leetcode.cn/problems/minimum-deletions-to-make-array-beautiful/description/)
+  * 遍历
 
 ---
 
@@ -161,6 +166,10 @@
 * [乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/description/)
 * [三角形最小路径和](https://leetcode.cn/problems/triangle/description/)
 * [掷骰子等于目标和的方法数](https://leetcode.cn/problems/number-of-dice-rolls-with-target-sum/description/)
+* [最大子数组和](https://leetcode.cn/problems/maximum-subarray/description/)
+* [网格中的最小路径代价](https://leetcode.cn/problems/minimum-path-cost-in-a-grid/description/)
+* 
+
 
 ## 二分查找
 
@@ -192,6 +201,8 @@
     * 哈希表
 * [最长平衡子字符串](https://leetcode.cn/problems/find-the-longest-balanced-substring-of-a-binary-string/description/)
     * 遍历 + 计数
+* [HTML 实体解析器](https://leetcode.cn/problems/html-entity-parser/description/)
+  * 哈希表 + 遍历
 
 ## 位运算
 

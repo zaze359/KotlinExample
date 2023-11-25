@@ -14,9 +14,13 @@ class A1 {
     }
 
 
-    fun b(b: ()-> Unit) {
+    fun b(b: () -> Unit) {
 
     }
+}
+
+class AAA(var value: Int) {
+
 }
 
 fun main() {
@@ -41,13 +45,6 @@ fun main() {
 //        if(it == 2) return@repeat
 //        println("repeat: $it end")
 //    }
-
-    var a = 2
-    object : Runnable {
-        override fun run() {
-            a = 3
-        }
-    }
 
 //    val result = Sort.bubbleSort(intArrayOf(6, 3, 2, 4, 5, 1))
 
