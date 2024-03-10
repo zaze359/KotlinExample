@@ -1,5 +1,6 @@
 package com.zaze.kotlin.example.typeclass
 
+import com.zaze.kotlin.example.AAAA
 import com.zaze.kotlin.example.typeclass.BookShow.show
 import com.zaze.kotlin.example.typeclass.ListFunctor.map
 import com.zaze.kotlin.example.typeclass.ListFunctor.show
@@ -18,6 +19,7 @@ import com.zaze.kotlin.example.typeclass.ListFunctor.show2
  * 函子: 高阶类型之间的映射 ????
  */
 fun main() {
+
     val a = { x: (Int) -> (Int) -> Int -> x(1) } // ((Int) -> (Int) -> Int)    ->     (Int) -> Int
     val b = { x: (Int) -> Int -> x(1) }       // ((Int) -> Int)    ->    Int
     val c = { c: Int -> c }                  // (Int)    ->   Int
@@ -53,9 +55,9 @@ fun main() {
     }
 }
 // ----------------------------------------------------------------------------
-
 /**
  *  Kind<out F, out A> 为 类型构造器F应用参数A后 产生的类型
+ *  支持协变
  */
 interface Kind<out F, out A>
 

@@ -61,10 +61,14 @@ fun main2() = runBlocking {
 //        val result = testSuspendable("testSuspendable")
 //        log(tag, "main result: $result ")
 
-//    withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
-//        log(tag, "aaaa: ${aa()}")
-//    }
-
+    val aa = withContext(ThreadPlugin.testExecutorStub.coroutineDispatcher) {
+        delay(1000)
+        log(tag, "aaaa: ${aa()}")
+        "aaa"
+    }
+    log(tag, "aa: ${aa}")
+    log(tag, "async111")
+    return@runBlocking
 //    withContext(Dispatchers.IO) {
 //        val file = File(".")
 //        log(tag, "file: ${file.absolutePath}")

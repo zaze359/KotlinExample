@@ -34,18 +34,20 @@ class Watermelon(weight: Double) : Fruit(weight), Ground
 fun <T> cut(t: T) where T : Fruit, T : Ground {}
 
 // ------------------------------------
-// 使用处型变，逆变；
-// T 是 Double，<in T> 表示可以接收 Double的父类。
-// Number 是 Double的父类，Array<Number> 是 Array<Double> 的子类
+/**
+ * 使用处型变，逆变；
+ * T 是 Double，<in T> 表示可以接收 Double的父类。
+ * Number 是 Double的父类，Array<Number> 是 Array<Double> 的子类
+ */
 inline fun <reified T> copyIn(dest: Array<in T>, src: Array<T>) {
     src.forEachIndexed { index, t ->
+        // Number = Double, Double 可以正常的赋值给num
         dest[index] = t
     }
-    println("copyIn T: ${T::class.java}")
-    // 由于 in 修饰，此处时无法读取到正确的数值的，返回的是 Any?
+    println("copyIn T: ${T::class.java}") // Double
+    // 由于 in 修饰， dest中的元素是T 的任意父类型，所以返回的是 Any?，
+//    src[0] = dest[0]
     val a: T = dest[0] as T
-
-
     src[0] = a
 }
 
@@ -57,10 +59,9 @@ inline fun <reified T> copyOut(dest: Array<T>, src: Array<out T>) {
         dest[index] = t
     }
     println("copyOut T: ${T::class.java}")
-    val a: T = dest[0]
-//    // 由于 out 修饰，此处无法赋值
-    // out 修饰，无法赋值，只能调用get获取 src中的值
-    // 父类Number 无法赋值给 子类Double
+    // 由于out 修饰，无法赋值，只能调用get获取 src中的值
+    val a: T = dest[0] // T  = Number
+    // dest 中元素是 number, 父类Number 无法赋值给 子类Double
 //    src[0] = a
 }
 

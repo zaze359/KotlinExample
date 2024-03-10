@@ -1,8 +1,8 @@
 package com.zaze.kotlin.example.algorithm.base
 
 /**
- * 下标从 0 开始，
- * 原地将数组进行堆化
+ * 堆排
+ * 下标从 0 开始，原地将数组进行堆化
  */
 class HeapSort {
     private val data: IntArray
@@ -74,6 +74,7 @@ class HeapSort {
     /**
      * 自上往下堆化: 大顶堆
      * 时间复杂度: O(logn)
+     * 空间复杂度: O(1),原地堆化
      * [node]：指定堆化的非叶子节点 node
      */
     private fun maxHeapify(node: Int) {

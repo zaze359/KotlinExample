@@ -43,12 +43,14 @@
 * [数组中两个数的最大异或值](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/)
     * 哈希表 + 位运算
 * [K 个元素的最大和](https://leetcode.cn/problems/maximum-sum-with-exactly-k-elements/description/)
-  * 贪心 + 等差数列求和
+    * 贪心 + 等差数列求和
 * [三个无重叠子数组的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)
-  * 动态规划
-  * 滑动窗口
+    * 动态规划
+    * 滑动窗口
 * [美化数组的最少删除数](https://leetcode.cn/problems/minimum-deletions-to-make-array-beautiful/description/)
-  * 遍历
+    * 遍历
+* [子数组的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums/description/)
+    * 单调栈 + 贡献值
 
 ---
 
@@ -141,8 +143,10 @@
     * BFS
     * 二分
 * [阈值距离内邻居最少的城市](https://leetcode.cn/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/)
-  * Dijkstra，单源最短路径 
-  * Floyd
+    * Dijkstra，单源最短路径
+    * Floyd
+* [到达首都的最少油耗](https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/description/)
+    * 贪心 + DFS
 
 ---
 
@@ -168,8 +172,7 @@
 * [掷骰子等于目标和的方法数](https://leetcode.cn/problems/number-of-dice-rolls-with-target-sum/description/)
 * [最大子数组和](https://leetcode.cn/problems/maximum-subarray/description/)
 * [网格中的最小路径代价](https://leetcode.cn/problems/minimum-path-cost-in-a-grid/description/)
-* 
-
+* [最小化旅行的价格总和](https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/)
 
 ## 二分查找
 
@@ -202,7 +205,10 @@
 * [最长平衡子字符串](https://leetcode.cn/problems/find-the-longest-balanced-substring-of-a-binary-string/description/)
     * 遍历 + 计数
 * [HTML 实体解析器](https://leetcode.cn/problems/html-entity-parser/description/)
-  * 哈希表 + 遍历
+    * 哈希表 + 遍历
+
+* [统计子串中的唯一字符](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string/description/)
+    * 贡献法 + 哈希
 
 ## 位运算
 
@@ -229,4 +235,4 @@
     * 遍历
     * 数学：等差求和 + 容斥
 * [最大和查询](https://leetcode.cn/problems/maximum-sum-queries/description/)
-  * 排序 + 单调栈 + 二分
+    * 排序 + 单调栈 + 二分
